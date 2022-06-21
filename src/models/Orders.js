@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
 
-export const orderSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     food_name: {
         type: String,
         required: true
     },
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
+
     client_adress: {
         type: String,
         required: true
@@ -19,3 +25,4 @@ export const orderSchema = new mongoose.Schema({
     timestamps: true
 })
 
+export default mongoose.model("orders", orderSchema)
