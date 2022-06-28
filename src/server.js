@@ -13,12 +13,14 @@ import "./utils/validator.util.js"
 
 import adminRoute from './routes/admin.route.js'
 import loginRoute from './routes/auth.route.js'
+import ordersRoute from './routes/orders.route.js'
 
 async function main() {
     await connection()
 
     app.use(adminRoute)
     app.use(loginRoute)
+    app.use(ordersRoute)
 }
 
 

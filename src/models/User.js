@@ -14,6 +14,15 @@ const userSchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true
+    },
+
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+
+    isManager: {
+        type: Boolean
     }
 }, {
     timestamps: true

@@ -1,6 +1,5 @@
 import url from 'url'
 
-
 export default(req, res, next) => {
     const { pathname } = url.parse(req.url)
     switch (pathname) {
