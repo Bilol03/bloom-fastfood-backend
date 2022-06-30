@@ -11,7 +11,7 @@ import "../config.js"
 import "./utils/validator.util.js"
 
 
-import adminRoute from './routes/admin.route.js'
+import adminRoute from './routes/food.route.js'
 import loginRoute from './routes/auth.route.js'
 import ordersRoute from './routes/orders.route.js'
 

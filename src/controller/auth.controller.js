@@ -4,13 +4,13 @@ import { InternalServerError } from "../utils/error.js"
 
 const LOGIN = async (req, res, next) => {
     try{
-        const { username, phone_number, isAdmin, isManager } = req.body
+        const { username, phone_number } = req.body
         const newData = await userSchema.create({
             username,
             phone_number,
             _id: Date.now().toString().slice(-9),
-            isAdmin: isAdmin ? isAdmin : false, 
-            isManager: isManager ? isManager : false, 
+            isAdmin: false, 
+            isManager: false, 
         })
         
         res.status(200).json({
@@ -24,6 +24,52 @@ const LOGIN = async (req, res, next) => {
     }
 }
 
+const GET = async (req, res, next) => {
+    try {
+      const userList = await userSchema.find()
+      userList ? res.send(userList): null  
+      return next()
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+const DELETE = async (req, res, next) => {
+    const id = req.body._id
+
+    const result = await userSchema.deleteOne({ _id: id })
+    console.log(result);
+
+    res.status(201).json({
+        status: 201,
+        message: "User successfully deleted!", 
+        data: result
+    })
+}
+
+const PUT = async(req, res, next) => {
+    try {
+        const{ _id, username, phone_number } = req.body
+        const updatedData = await userSchema.updateOne({ _id: _id },
+            {
+                $set: {
+                    username: username,
+                    phone_number: phone_number
+                }
+            })
+        console.log(updatedData);
+        res.status(201).json({
+            status: 201,
+            message: "The user successfully updated!",
+            result: updatedData
+        })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export default {
-    LOGIN
+    LOGIN,
+    GET,
+    DELETE,
+    PUT
 }

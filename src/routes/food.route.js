@@ -1,5 +1,5 @@
 import { Router } from "express";
-import CT from '../controller/admin.controller.js'
+import CT from '../controller/food.controller.js'
 
 const route = Router()
 

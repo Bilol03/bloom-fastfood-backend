@@ -14,11 +14,10 @@ export default async (req, res, next) => {
         const data = await userSchema.findOne({
             _id: _id
         })
-        console.log(data);
-        if(data.isAdmin == false) {
-            return next(new ForbiddenError(403, "You are not allowed"))
-        }else{
+        if(data.isAdmin == true) {
             return next()
+        }else{
+            return next(new ForbiddenError(403, "You are not allowed"))
         }
 
     } catch (error) {

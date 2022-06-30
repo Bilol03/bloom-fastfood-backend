@@ -20,13 +20,25 @@ const POST = async (req, res, next) => {
 }
 
 const GET = async (req, res, next) => {
-    const orderData = await orderSchema.find()
-    res.send(orderData)
+    try {
+        const orderData = await orderSchema.find()
+        res.send(orderData)
+    } catch (error) {
+        console.log(error.message);
+        
+    }
 } 
 
+const DELETE = async (req, res, next) => {
+    const { _id } = req.body
+    const data = orderSchema.deleteOne({
+        _id: _id
+    })
+}
 
 
 export default {
     POST,
-    GET
+    GET,
+    DELETE
 }
