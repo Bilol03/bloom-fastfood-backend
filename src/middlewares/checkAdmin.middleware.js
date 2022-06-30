@@ -1,4 +1,4 @@
-import { ForbiddenError } from '../utils/error.js'
+import { ForbiddenError, AuthorizationError } from '../utils/error.js'
 import JWT from '../utils/jwt.js'
 import userSchema from '../models/User.js'
 
@@ -14,6 +14,11 @@ export default async (req, res, next) => {
         const data = await userSchema.findOne({
             _id: _id
         })
+        
+        if(data == null) {
+            return next(new AuthorizationError(500, "Invalid Token"))
+        }
+
         if(data.isAdmin == true) {
             return next()
         }else{
