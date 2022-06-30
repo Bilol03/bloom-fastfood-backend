@@ -6,5 +6,6 @@ const router = Router()
 router.get('/api/orders', checkAdmin, CT.GET)
 router.delete('/api/orders', checkAdmin, CT.DELETE)
 router.post('/api/user-order', CT.POST)
+router.post('/api/user-order', CT.PUT)
 
 export default router
