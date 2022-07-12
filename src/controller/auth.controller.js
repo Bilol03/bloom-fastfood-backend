@@ -31,19 +31,24 @@ const GET = async (req, res, next) => {
       return next()
     } catch (error) {
         console.log(error.message);
+        return next(new InternalServerError(500, error.message))
     }
 }
 const DELETE = async (req, res, next) => {
-    const id = req.body._id
+    try {
+        const id = req.body._id
 
-    const result = await userSchema.deleteOne({ _id: id })
-    console.log(result);
-
-    res.status(201).json({
-        status: 201,
-        message: "User successfully deleted!", 
-        data: result
-    })
+        const result = await userSchema.deleteOne({ _id: id })
+        console.log(result);
+    
+        res.status(201).json({
+            status: 201,
+            message: "User successfully deleted!", 
+            data: result
+        })
+    } catch (error) {
+        return next(new InternalServerError(500, error.message))
+    }
 }
 
 const PUT = async(req, res, next) => {
@@ -64,6 +69,7 @@ const PUT = async(req, res, next) => {
         })
     } catch (error) {
         console.log(error.message);
+        return next(new InternalServerError(501, error.message))
     }
 }
 

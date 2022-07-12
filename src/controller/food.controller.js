@@ -111,6 +111,7 @@ const DELETE = async (req, res, next) => {
         })
     } catch (error) {
         console.log(error.message);
+        return next(new InternalServerError(501, error.message))
     }
 }
 
